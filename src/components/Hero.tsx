@@ -190,7 +190,7 @@ export default function Hero({ personal, onOpenChat }: HeroProps) {
           <div className="mb-8">
             <a
               href="/resume.pdf"
-              download
+              download="Muhammad_Anas_Resume.pdf"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-black text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
               style={{ background: 'linear-gradient(135deg, #00d4ff, #a855f7)', boxShadow: '0 4px 20px rgba(0,212,255,0.4)' }}
               onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,212,255,0.6)')}
