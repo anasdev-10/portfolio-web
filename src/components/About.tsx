@@ -178,7 +178,7 @@ export default function About({ experience, education, futureGoals }: AboutProps
             <p className="text-slate-300 mb-2 text-lg font-semibold">Want the full picture?</p>
             <p className="text-slate-500 text-sm mb-6">Download my resume for complete details on projects, experience, and skills.</p>
             <a
-              href="/resume.pdf"
+              href="/Muhammad_Anas_Resume.pdf"
               download="Muhammad_Anas_Resume.pdf"
               className="btn-primary inline-flex items-center gap-2"
             >
