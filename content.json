@@ -1,0 +1,248 @@
+{
+  "personal": {
+    "name": "Muhammad Anas",
+    "title": "AI Engineer",
+    "email": "miananas.info@gmail.com",
+    "location": "Lahore, Punjab, Pakistan",
+    "bio": "Building production-grade AI systems that solve real-world problems. I have worked on LLM-powered applications, Multimodal AI, RAG Systems and scalable ML pipelines.",
+    "tagline": "My work is my proof.",
+    "socials": {
+      "github": "https://github.com/anasdev-10",
+      "linkedin": "https://linkedin.com/in/muhammad-anas10",
+      "email": "miananas.info@gmail.com"
+    }
+  },
+  "skills": {
+    "languages": [
+      "Python",
+      "SQL",
+      "C/C++"
+    ],
+    "ml_ai": [
+      "PyTorch",
+      "TensorFlow",
+      "Keras",
+      "Scikit-learn",
+      "Hugging Face Transformers",
+      "OpenCV",
+      "CLIP",
+      "LangGraph",
+      "LangChain",
+      "Google Gemini API",
+      "Ollama (Llama 3.2)",
+      "FastMCP",
+      "Prompt Engineering"
+    ],
+    "backend": [
+      "FastAPI",
+      "Flask",
+      "PostgreSQL",
+      "MongoDB Atlas",
+      "Weaviate (Vector DB)",
+      "Redis",
+      "REST APIs"
+    ],
+    "tools": [
+      "Git",
+      "Docker",
+      "Playwright",
+      "BeautifulSoup",
+      "Jupyter Notebook",
+      "Railway",
+      "Supabase"
+    ]
+  },
+  "projects": [
+    {
+      "id": "findify",
+      "title": "Findify",
+      "subtitle": "Multimodal AI Product Discovery Platform",
+      "description": "End-to-end multimodal search using CLIP embeddings and Weaviate. Sub-100ms retrieval across 7,000+ products.",
+      "longDescription": "Engineered end-to-end multimodal search (text + image) using CLIP embeddings and Weaviate named vectors, enabling product discovery by photo or natural-language description — sub-100ms retrieval across 7,000+ products validated at 250+ concurrent RPS. Built parallel Playwright scraping pipeline (Amazon, eBay, Alibaba) with ThreadPoolExecutor; reduced per-batch enrichment time ~60%, sourcing 7,000+ listings; Upstash Redis caching layer cut average retrieval latency 85% (35ms → <5ms). Resolved 4 production-blocking failures (Weaviate ingestion mismatch, ISP port-blocking, Railway RAM overflow, env var mismatches), bringing system from 0% to full search functionality.",
+      "duration": "Nov 2024 – Jul 2026 (FYP - Lead)",
+      "techStack": [
+        "FastAPI",
+        "MongoDB Atlas",
+        "Weaviate",
+        "CLIP",
+        "Redis",
+        "Playwright"
+      ],
+      "achievements": [
+        "Sub-100ms retrieval at 250+ concurrent RPS",
+        "60% latency reduction on scraping pipeline",
+        "85% improvement on average latency (35ms → <5ms)",
+        "Resolved 4 production-blocking failures",
+        "7,000+ product listings indexed and searchable"
+      ],
+      "impact": "Enables product discovery by photo or natural-language description across 7,000+ listings",
+      "github": "https://github.com/anasdev-10/Findify",
+      "learnings": "Production systems are hard—scaling, caching, debugging infrastructure failures taught me more than a semester of classes."
+    },
+    {
+      "id": "mcp-analyst",
+      "title": "MCP-Based SQL Analyst",
+      "subtitle": "NLP-Driven BI Assistant",
+      "description": "Conversational analytics for non-technical users querying complex data warehouses in plain English.",
+      "longDescription": "Built a conversational NLP-driven BI assistant allowing non-technical users to query a 2.5M-row retail warehouse in plain English, eliminating dependency on analysts for routine reporting. Implemented an MCP server with 11 capabilities as a read-only LLM gateway; achieved 100% adversarial block rate across all SQL injection and PII-extraction tests. Designed a YAML semantic layer mapping business terms to SQL metric formulas and safe join paths, eliminating schema ambiguity for the LLM.",
+      "duration": "May 2026",
+      "techStack": [
+        "FastMCP",
+        "PostgreSQL",
+        "Gemini 2.5 Flash",
+        "Next.js",
+        "YAML Semantic Layer"
+      ],
+      "achievements": [
+        "Queries 2.5M-row retail warehouse",
+        "100% SQL injection & PII-extraction defense",
+        "YAML semantic layer for business term mapping",
+        "11-capability MCP server gateway",
+        "Natural language query interface"
+      ],
+      "impact": "Non-technical users query complex data without analyst dependency; reduced reporting turnaround from hours to seconds",
+      "github": "https://github.com/anasdev-10/MCP-Based-RetailAnalyst",
+      "learnings": "Security-first design for LLM+DB systems is critical. MCP abstraction makes LLMs safer for data access."
+    },
+    {
+      "id": "shopping-advisor",
+      "title": "ShopScout",
+      "subtitle": "AI-Powered Intelligent Shopping Advisor",
+      "description": "LangGraph-based 4-node pipeline combining deterministic filtering with LLM ranking for hallucination-free recommendations.",
+      "longDescription": "Architected a 4-node LangGraph multi-agent pipeline combining deterministic PostreSQL filtering with LLM-based ranking; achieved 100% intent extraction accuracy parsing complex user constraints (budget, brand, specs). Eliminated search hallucinations by grounding LLM recommendations in real-time verified database context; used Ollama (Llama 3.2) as local fallback ensuring zero downtime on API failures. Built a BeautifulSoup scraping pipeline ingesting e-commerce catalog data into PostgreSQL (Supabase) and MongoDB, feeding the recommendation engine with verified product data.",
+      "techStack": [
+        "Python",
+        "LangGraph",
+        "Gemini API",
+        "Ollama",
+        "MongoDB",
+        "PostgreSQL",
+        "Next.js"
+      ],
+      "achievements": [
+        "95% intent extraction accuracy",
+        "Zero downtime with Ollama local fallback",
+        "Grounded LLM recommendations in verified data",
+        "4-node multi-agent pipeline",
+        "BeautifulSoup scraping pipeline"
+      ],
+      "impact": "Eliminates hallucinations through database-grounded recommendations; users trust suggestions because they're verified",
+      "github": "https://github.com/anasdev-10/ShopScout",
+      "learnings": "Combining symbolic reasoning (database queries) with neural networks (LLMs) creates robust systems neither can achieve alone."
+    },
+    {
+      "id": "kisanai",
+      "title": "PlantDoc",
+      "subtitle": "Crop Disease Detection",
+      "description": "FastAPI + PyTorch system for real-time crop disease diagnosis. 99% accuracy across 38 disease classes.",
+      "longDescription": "Fine-tuned EfficientNet-B3 on a 54,000-image plant disease dataset; achieved 99% test accuracy across 38 classes with batch upload and real-time inference, enabling farmers to diagnose crop disease from a photo. Built with FastAPI backend and Streamlit frontend for accessibility.",
+      "techStack": [
+        "FastAPI",
+        "PyTorch",
+        "Streamlit",
+        "EfficientNet-B3",
+        "ResNet18"
+      ],
+      "achievements": [
+        "99% test accuracy across 38 classes",
+        "Trained on 54,000-image dataset",
+        "Batch upload + real-time inference",
+        "Enables farmers to diagnose from photos",
+        "Mobile-friendly web interface"
+      ],
+      "impact": "Agricultural AI: farmers diagnose crop diseases instantly, reducing crop loss and optimizing treatment",
+      "github": "https://github.com/anasdev-10/PlantDoc",
+      "learnings": "AI for social impact—working on problems beyond tech itself is deeply motivating."
+    },
+    {
+      "id": "traffic-sign-recognition",
+      "title": "Traffic Sign Recognition",
+      "subtitle": "Computer Vision Model",
+      "description": "Traffic sign recognition model built with CNNs for autonomous driving and driver assistance systems.",
+      "longDescription": "Developed a Convolutional Neural Network (CNN) architecture to detect and classify traffic signs from images. Applied data augmentation techniques to improve model robustness across various lighting and weather conditions, optimizing for real-time edge inference.",
+      "techStack": [
+        "Python",
+        "TensorFlow",
+        "OpenCV",
+        "Jupyter Notebook"
+      ],
+      "achievements": [
+        "Built custom CNN architecture for image classification",
+        "Implemented robust data augmentation",
+        "Processed standard traffic sign datasets"
+      ],
+      "impact": "Enhances autonomous vehicle perception systems for safer navigation.",
+      "github": "https://github.com/anasdev-10/Traffic-Sign-Recognition-Model",
+      "learnings": "Data augmentation is critical for computer vision models to generalize to real-world edge cases."
+    },
+    {
+      "id": "healthcare-ai-malaria",
+      "title": "HealthCare AI for Malaria",
+      "subtitle": "Automated Disease Diagnosis",
+      "description": "Malaria cell image classification using CNN for automated disease diagnosis.",
+      "longDescription": "Built a diagnostic AI tool utilizing Convolutional Neural Networks to classify cell images as infected or uninfected with malaria. Designed to assist healthcare professionals by accelerating the diagnostic process and reducing human error in microscopic analysis.",
+      "techStack": [
+        "Python",
+        "TensorFlow",
+        "Keras",
+        "Jupyter Notebook"
+      ],
+      "achievements": [
+        "Trained CNN on microscopic cell imagery",
+        "Automated the diagnostic classification process",
+        "Achieved high validation accuracy"
+      ],
+      "impact": "Assists healthcare professionals by accelerating malaria diagnosis in clinical settings.",
+      "github": "https://github.com/anasdev-10/HealthCare-AI-for-Malaria",
+      "learnings": "Healthcare AI requires extreme precision and minimal false negatives to be clinically viable."
+    }
+  ],
+  "experience": {
+    "title": "Machine Learning Intern",
+    "company": "Elevvo Pathways",
+    "location": "Remote, Egypt",
+    "duration": "Aug 2025 – Oct 2025",
+    "description": "Trained classification and regression models on 50K–200K-record datasets using TensorFlow and Scikit-learn; managed the full pipeline from data cleaning, preprocessing, and feature engineering through cross-validation and evaluation. Built CNN-based image recognition systems for a multi-class visual task; applied custom data augmentation and achieved 88% validation accuracy.",
+    "keyResponsibilities": [
+      "Trained classification and regression models on large datasets (50K–200K records)",
+      "Performed data preprocessing, feature engineering, and evaluation",
+      "Built CNN-based image recognition systems",
+      "Applied custom data augmentation techniques",
+      "Achieved 97% validation accuracy on visual recognition task"
+    ]
+  },
+  "education": {
+    "degree": "B.S. Artificial Intelligence",
+    "school": "University of Central Punjab, Lahore",
+    "duration": "Nov 2022 – Jul 2026",
+    "coursework": "Machine Learning, Deep Learning, Computer Vision, NLP, Generative AI, Knowledge Representation & Reasoning, Database Systems, Data Structures & Algorithms, Probability & Statistics",
+    "notable": "Final Year Project Lead: Findify (Multimodal AI Product Discovery Platform)"
+  },
+  "futureGoals": {
+    "focus": "Production AI systems, LLM engineering, scalable ML architecture",
+    "interests": [
+      "Building production-grade AI applications",
+      "LLM-powered systems design",
+      "Multimodal AI and vector search",
+      "Data privacy and security in AI",
+      "AI for emerging markets"
+    ]
+  },
+  "assistantKnowledge": {
+    "personality": "Professional yet approachable. Direct, knowledgeable, honest. Showcases technical depth. Eager to discuss AI/ML problems.",
+    "keyMessages": [
+      "My work is my proof—building real systems with measurable impact",
+      "Production systems are complex; I've resolved production failures and learned from them",
+      "Interested in real problems that need AI solutions",
+      "Security and reliability aren't afterthoughts—they're part of the design"
+    ],
+    "commonQuestions": {
+      "findify": "Multimodal search using CLIP and Weaviate. Text or image search across 7,000+ products at sub-100ms latency. Real production system handling 250+ concurrent users.",
+      "mcp": "Built a semantic SQL layer for non-technical users. 2.5M rows. 100% injection defense. MCP abstraction makes LLMs safer for databases.",
+      "shopscout": "Multi-agent LangGraph pipeline. Database queries + LLM ranking. Zero hallucinations because recommendations are grounded in verified data.",
+      "plantdoc": "Crop disease detection for farmers. 99% accuracy on 38 disease classes. Real-world AI application beyond tech.",
+      "collaborate": "Open to AI engineering roles, consulting, and building AI systems. Email or LinkedIn for specifics.",
+      "experience": "ML internship at Elevvo, but projects show what I can do—that's the real proof."
+    }
+  }
+}
