@@ -121,7 +121,7 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
         {/* Footer */}
         <div className="mt-24 pt-8 border-t border-brand-border text-center flex flex-col items-center gap-4">
           <p className="text-brand-dim text-xs font-mono">
-            © 2026 Muhammad Anas · Built with Next.js &amp; Gemini AI
+            © 2026 Muhammad Anas
           </p>
         </div>
       </div>

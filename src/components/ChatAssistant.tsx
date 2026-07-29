@@ -173,7 +173,7 @@ export default function ChatAssistant({ isOpen, onOpen, onClose, initialMessage 
           </div>
           <div>
             <p className="font-semibold text-brand-text text-sm">Anas Assistant</p>
-            <p className="text-brand-dim text-xs">Powered by Gemini · Always here</p>
+            <p className="text-brand-dim text-xs">Always here</p>
           </div>
         </div>
         <div className="flex items-center gap-1">
