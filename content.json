@@ -198,10 +198,10 @@
     }
   ],
   "experience": {
-    "title": "Machine Learning Intern",
+    "title": "Machine Learning Trainee",
     "company": "Elevvo Pathways",
     "location": "Remote, Egypt",
-    "duration": "Aug 2025 – Oct 2025",
+    "duration": "Aug 2025",
     "description": "Trained classification and regression models on 50K–200K-record datasets using TensorFlow and Scikit-learn; managed the full pipeline from data cleaning, preprocessing, and feature engineering through cross-validation and evaluation. Built CNN-based image recognition systems for a multi-class visual task; applied custom data augmentation and achieved 88% validation accuracy.",
     "keyResponsibilities": [
       "Trained classification and regression models on large datasets (50K–200K records)",
