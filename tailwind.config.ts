@@ -9,10 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'brand-bg': '#0a0e27',
-        'brand-card': '#111827',
-        'brand-cyan': '#00d4ff',
-        'brand-pink': '#ff006e',
+        'brand-bg': '#0B0B0C',
+        'brand-card': '#17181B',
+        'brand-card-hover': '#1E2025',
+        'brand-border': 'rgba(255, 255, 255, 0.08)',
+        'brand-primary': '#3B82F6',
+        'brand-primary-hover': '#2563EB',
+        'brand-success': '#22C55E',
+        'brand-text': '#F5F5F5',
+        'brand-muted': '#A3A3A3',
+        'brand-dim': '#737373',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

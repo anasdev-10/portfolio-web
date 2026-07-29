@@ -29,10 +29,6 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
       href: `mailto:${personal.socials.email}`,
       Icon: Mail,
       description: 'Best for project inquiries & consulting',
-      color: 'cyan',
-      borderClass: 'border-cyan-500/30 hover:border-cyan-500/70 hover:shadow-cyan-500/15',
-      iconBg: 'bg-cyan-500/10',
-      iconColor: 'text-cyan-400',
     },
     {
       label: 'LinkedIn',
@@ -40,10 +36,6 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
       href: personal.socials.linkedin,
       Icon: Linkedin,
       description: 'Connect for opportunities & networking',
-      color: 'pink',
-      borderClass: 'border-pink-500/30 hover:border-pink-500/70 hover:shadow-pink-500/15',
-      iconBg: 'bg-pink-500/10',
-      iconColor: 'text-pink-400',
     },
     {
       label: 'GitHub',
@@ -51,51 +43,53 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
       href: personal.socials.github,
       Icon: Github,
       description: 'Explore all projects & source code',
-      color: 'violet',
-      borderClass: 'border-violet-500/30 hover:border-violet-500/70 hover:shadow-violet-500/15',
-      iconBg: 'bg-violet-500/10',
-      iconColor: 'text-violet-400',
     },
   ];
 
   return (
-    <section id="contact" ref={sectionRef} className="py-28 px-6 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/3 to-transparent pointer-events-none" />
-
+    <section id="contact" ref={sectionRef} className="py-28 px-6 relative bg-brand-bg">
       <div className="max-w-4xl mx-auto relative z-10">
+        
         {/* Heading */}
         <div
-          className={`text-center mb-16 transition-all duration-700 ${
+          className={`mb-16 transition-all duration-700 ${
             visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <p className="text-cyan-400 font-mono text-sm uppercase tracking-widest mb-3">// get in touch</p>
-          <h2 className="text-4xl md:text-5xl font-black mb-4 section-heading">
-            Let&apos;s Build Together
-          </h2>
-          <p className="text-slate-400 max-w-lg mx-auto text-lg">
-            Whether it&apos;s a full-time role, consulting project, or just a chat about AI — I&apos;m always open to the right conversation.
-          </p>
+          <div className="flex items-center gap-4 mb-4">
+            <p className="text-brand-primary font-mono text-sm uppercase tracking-widest">// get in touch</p>
+            <div className="h-px bg-brand-border flex-grow max-w-[200px]" />
+          </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-text">
+              Let&apos;s Build Together
+            </h2>
+            <p className="text-brand-muted max-w-sm text-sm">
+              Whether it&apos;s a full-time role, consulting project, or just a chat about AI — I&apos;m always open to the right conversation.
+            </p>
+          </div>
         </div>
 
         {/* Contact cards */}
-        <div className="grid md:grid-cols-3 gap-5 mb-10">
+        <div className="grid md:grid-cols-3 gap-5 mb-16">
           {contactLinks.map((link, idx) => (
             <a
               key={link.label}
               href={link.href}
               target={link.href.startsWith('mailto') ? undefined : '_blank'}
               rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-              className={`card-neon p-6 block group transition-all duration-500 hover:shadow-xl hover:-translate-y-1 ${link.borderClass}`}
-              style={{ transitionDelay: `${idx * 100}ms`, opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(30px)' }}
+              className={`card-graphite p-6 block group ${
+                visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${idx * 100}ms` }}
             >
-              <div className={`p-3 rounded-xl ${link.iconBg} w-fit mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <link.Icon size={22} className={link.iconColor} />
+              <div className="p-3 rounded-xl bg-[rgba(255,255,255,0.03)] border border-brand-border w-fit mb-5 group-hover:bg-brand-primary group-hover:border-brand-primary transition-colors duration-300">
+                <link.Icon size={20} className="text-brand-text" />
               </div>
-              <h3 className="font-bold text-white mb-1 text-lg">{link.label}</h3>
-              <p className={`font-mono text-sm mb-2 ${link.iconColor}`}>{link.value}</p>
-              <p className="text-slate-500 text-xs">{link.description}</p>
-              <div className={`flex items-center gap-1 mt-4 text-xs font-medium ${link.iconColor} opacity-0 group-hover:opacity-100 transition-opacity`}>
+              <h3 className="font-semibold text-brand-text mb-1 text-lg">{link.label}</h3>
+              <p className="font-mono text-sm mb-3 text-brand-primary">{link.value}</p>
+              <p className="text-brand-dim text-xs">{link.description}</p>
+              <div className="flex items-center gap-1 mt-5 text-xs font-medium text-brand-text opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span>Open</span>
                 <ArrowRight size={12} />
               </div>
@@ -105,13 +99,13 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
 
         {/* Chat CTA */}
         <div
-          className={`text-center transition-all duration-700 delay-400 ${
+          className={`text-center transition-all duration-700 delay-300 ${
             visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="glass rounded-2xl p-8 border border-cyan-500/20">
-            <p className="text-slate-300 text-lg mb-2 font-semibold">Not sure where to start?</p>
-            <p className="text-slate-500 mb-6 text-sm">
+          <div className="inline-block card-graphite p-8">
+            <p className="text-brand-text text-lg mb-2 font-semibold">Not sure where to start?</p>
+            <p className="text-brand-muted mb-8 text-sm">
               Chat with Anas Assistant — it knows everything about my projects, skills, and availability.
             </p>
             <button
@@ -125,9 +119,9 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
         </div>
 
         {/* Footer */}
-        <div className="mt-16 pt-8 border-t border-slate-800/50 text-center">
-          <p className="text-slate-600 text-sm font-mono">
-            © 2026 Muhammad Anas · Built with Next.js &amp; Gemini AI · Lahore, Pakistan
+        <div className="mt-24 pt-8 border-t border-brand-border text-center flex flex-col items-center gap-4">
+          <p className="text-brand-dim text-xs font-mono">
+            © 2026 Muhammad Anas · Built with Next.js &amp; Gemini AI
           </p>
         </div>
       </div>

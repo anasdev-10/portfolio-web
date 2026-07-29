@@ -142,14 +142,13 @@ export default function ChatAssistant({ isOpen, onOpen, onClose, initialMessage 
         className="fixed bottom-6 right-6 z-50 group"
         aria-label="Open Anas Assistant"
       >
-        {/* Pulse ring */}
-        <span className="absolute inset-0 rounded-full bg-cyan-500/40 ping-slow" />
-        <div className="relative w-14 h-14 bg-gradient-to-br from-cyan-500 to-pink-600 rounded-full flex items-center justify-center shadow-2xl shadow-cyan-500/30 group-hover:shadow-cyan-500/50 group-hover:scale-110 transition-all duration-300">
+        <span className="absolute inset-0 rounded-full bg-brand-primary/20 ping-slow" />
+        <div className="relative w-14 h-14 bg-brand-primary rounded-full flex items-center justify-center shadow-lg shadow-brand-primary/30 group-hover:shadow-brand-primary/50 group-hover:scale-105 transition-all duration-300">
           <MessageCircle size={24} className="text-white" />
         </div>
         {/* Tooltip */}
         <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-          <div className="bg-slate-800 border border-slate-700 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap">
+          <div className="bg-brand-card border border-brand-border text-brand-text text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
             Chat with Anas Assistant
           </div>
         </div>
@@ -159,35 +158,35 @@ export default function ChatAssistant({ isOpen, onOpen, onClose, initialMessage 
 
   return (
     <div
-      className={`fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-24px)] flex flex-col bg-[#0d1117] border border-cyan-500/30 rounded-2xl shadow-2xl shadow-cyan-500/10 transition-all duration-300 ${
+      className={`fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-24px)] flex flex-col bg-brand-bg border border-brand-border rounded-2xl shadow-2xl transition-all duration-300 ${
         minimized ? 'h-[60px]' : 'h-[540px] max-h-[calc(100vh-80px)]'
       }`}
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-cyan-600/90 to-pink-600/90 rounded-t-2xl flex-shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 bg-brand-card border-b border-brand-border rounded-t-2xl flex-shrink-0">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="w-9 h-9 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
-              <Bot size={18} className="text-white" />
+            <div className="w-9 h-9 bg-[rgba(255,255,255,0.05)] rounded-full flex items-center justify-center border border-brand-border">
+              <Bot size={18} className="text-brand-text" />
             </div>
-            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 border-2 border-[#0d1117] rounded-full" />
+            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-brand-success border-2 border-brand-card rounded-full" />
           </div>
           <div>
-            <p className="font-bold text-white text-sm">Anas Assistant</p>
-            <p className="text-white/70 text-xs">Powered by Gemini · Always here</p>
+            <p className="font-semibold text-brand-text text-sm">Anas Assistant</p>
+            <p className="text-brand-dim text-xs">Powered by Gemini · Always here</p>
           </div>
         </div>
         <div className="flex items-center gap-1">
           <button
             onClick={() => setMinimized(!minimized)}
-            className="p-1.5 text-white/70 hover:text-white hover:bg-white/15 rounded-lg transition-all"
+            className="p-1.5 text-brand-muted hover:text-brand-text hover:bg-[rgba(255,255,255,0.05)] rounded-lg transition-all"
             aria-label={minimized ? 'Expand chat' : 'Minimize chat'}
           >
             {minimized ? <Maximize2 size={16} /> : <Minimize2 size={16} />}
           </button>
           <button
             onClick={onClose}
-            className="p-1.5 text-white/70 hover:text-white hover:bg-white/15 rounded-lg transition-all"
+            className="p-1.5 text-brand-muted hover:text-brand-text hover:bg-[rgba(255,255,255,0.05)] rounded-lg transition-all"
             aria-label="Close chat"
           >
             <X size={16} />
@@ -208,8 +207,8 @@ export default function ChatAssistant({ isOpen, onOpen, onClose, initialMessage 
                 <div
                   className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-xs ${
                     msg.sender === 'user'
-                      ? 'bg-cyan-600'
-                      : 'bg-gradient-to-br from-pink-600 to-violet-600'
+                      ? 'bg-brand-primary text-white'
+                      : 'bg-brand-card border border-brand-border text-brand-text'
                   }`}
                 >
                   {msg.sender === 'user' ? <User size={12} /> : <Bot size={12} />}
@@ -220,13 +219,13 @@ export default function ChatAssistant({ isOpen, onOpen, onClose, initialMessage 
                   <div
                     className={`px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                       msg.sender === 'user'
-                        ? 'bg-cyan-600 text-white rounded-br-sm'
-                        : 'bg-slate-800/90 text-slate-100 border border-slate-700/50 rounded-bl-sm'
+                        ? 'bg-brand-primary text-white rounded-br-sm'
+                        : 'bg-brand-card border border-brand-border text-brand-text rounded-bl-sm'
                     }`}
                   >
                     {msg.text}
                   </div>
-                  <span className="text-slate-600 text-[10px] px-1">{formatTime(msg.timestamp)}</span>
+                  <span className="text-brand-dim text-[10px] px-1">{formatTime(msg.timestamp)}</span>
                 </div>
               </div>
             ))}
@@ -234,15 +233,15 @@ export default function ChatAssistant({ isOpen, onOpen, onClose, initialMessage 
             {/* Typing indicator */}
             {loading && (
               <div className="flex items-end gap-2">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-pink-600 to-violet-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-7 h-7 rounded-full bg-brand-card border border-brand-border flex items-center justify-center flex-shrink-0 text-brand-text">
                   <Bot size={12} />
                 </div>
-                <div className="px-4 py-3 bg-slate-800/90 border border-slate-700/50 rounded-2xl rounded-bl-sm">
+                <div className="px-4 py-3 bg-brand-card border border-brand-border rounded-2xl rounded-bl-sm">
                   <div className="flex gap-1 items-center">
                     {[0, 1, 2].map((i) => (
                       <div
                         key={i}
-                        className="w-2 h-2 bg-slate-400 rounded-full"
+                        className="w-1.5 h-1.5 bg-brand-muted rounded-full"
                         style={{ animation: `bounce-dot 1.2s ease-in-out ${i * 0.2}s infinite` }}
                       />
                     ))}
@@ -254,16 +253,16 @@ export default function ChatAssistant({ isOpen, onOpen, onClose, initialMessage 
             <div ref={chatEndRef} />
           </div>
 
-          {/* Quick replies — shown when only welcome message */}
+          {/* Quick replies */}
           {messages.length === 1 && !loading && (
-            <div className="px-4 pb-2 border-t border-slate-800/50">
-              <p className="text-slate-600 text-xs mt-2 mb-2">Quick questions:</p>
+            <div className="px-4 pb-3 border-t border-brand-border pt-3">
+              <p className="text-brand-dim text-xs mb-2">Quick questions:</p>
               <div className="flex flex-col gap-1.5">
                 {QUICK_REPLIES.map((reply) => (
                   <button
                     key={reply}
                     onClick={() => handleSendMessage(reply)}
-                    className="text-left text-xs px-3 py-2 bg-slate-800/60 hover:bg-slate-700/60 border border-slate-700/50 hover:border-cyan-500/40 rounded-xl text-slate-300 hover:text-white transition-all duration-200"
+                    className="text-left text-xs px-3 py-2 bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.05)] border border-brand-border hover:border-brand-primary/50 rounded-xl text-brand-muted hover:text-brand-text transition-all duration-200"
                   >
                     {reply}
                   </button>
@@ -273,8 +272,8 @@ export default function ChatAssistant({ isOpen, onOpen, onClose, initialMessage 
           )}
 
           {/* Input */}
-          <div className="p-3 border-t border-slate-800/50 flex-shrink-0">
-            <div className="flex gap-2 items-center bg-slate-800/80 border border-slate-700/50 focus-within:border-cyan-500/50 rounded-xl px-3 py-2 transition-all">
+          <div className="p-3 border-t border-brand-border flex-shrink-0 bg-brand-card rounded-b-2xl">
+            <div className="flex gap-2 items-center bg-brand-bg border border-brand-border focus-within:border-brand-primary/50 rounded-xl px-3 py-2 transition-all">
               <input
                 ref={inputRef}
                 type="text"
@@ -282,19 +281,19 @@ export default function ChatAssistant({ isOpen, onOpen, onClose, initialMessage 
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me anything..."
-                className="flex-1 bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none"
+                className="flex-1 bg-transparent text-sm text-brand-text placeholder:text-brand-dim focus:outline-none"
                 disabled={loading}
               />
               <button
                 onClick={() => handleSendMessage(inputValue)}
                 disabled={loading || !inputValue.trim()}
-                className="p-1.5 bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-700 disabled:opacity-50 rounded-lg transition-all duration-200 flex-shrink-0"
+                className="p-1.5 bg-brand-primary hover:bg-brand-primary-hover disabled:bg-brand-border disabled:opacity-50 rounded-lg transition-all duration-200 flex-shrink-0"
                 aria-label="Send message"
               >
                 <Send size={14} className="text-white" />
               </button>
             </div>
-            <p className="text-slate-700 text-[10px] text-center mt-1.5">
+            <p className="text-brand-dim text-[10px] text-center mt-2">
               AI responses · Verify important details
             </p>
           </div>

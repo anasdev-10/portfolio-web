@@ -72,24 +72,24 @@ export default function GithubProjects({ username, featuredProjects }: GithubPro
   }
 
   return (
-    <section ref={sectionRef} className="py-16 px-6 relative border-t border-slate-800/50">
+    <section ref={sectionRef} className="py-16 px-6 relative border-t border-brand-border bg-brand-bg">
       <div className="max-w-6xl mx-auto relative z-10">
         
         <div className={`flex items-center justify-between mb-10 transition-all duration-700 ${
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <div>
-            <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-              <Github size={24} className="text-slate-400" />
+            <h3 className="text-2xl font-bold text-brand-text mb-2 flex items-center gap-2">
+              <Github size={24} className="text-brand-muted" />
               Other Open Source Work
             </h3>
-            <p className="text-slate-400 text-sm">Smaller projects, scripts, and experiments directly from GitHub.</p>
+            <p className="text-brand-muted text-sm">Smaller projects, scripts, and experiments directly from GitHub.</p>
           </div>
           <a 
             href={`https://github.com/${username}`} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition-all text-sm font-medium"
+            className="hidden sm:flex items-center gap-2 px-4 py-2 bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.08)] text-brand-text rounded-lg border border-brand-border transition-all text-sm font-medium"
           >
             View GitHub Profile <ExternalLink size={14} />
           </a>
@@ -102,37 +102,37 @@ export default function GithubProjects({ username, featuredProjects }: GithubPro
               href={repo.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`block card-neon p-6 group transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 ${
+              className={`block card-graphite p-6 group transition-all duration-300 ${
                 visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
               style={{ transitionDelay: `${100 + idx * 50}ms` }}
             >
               <div className="flex justify-between items-start mb-4">
-                <Github size={20} className="text-indigo-400 group-hover:text-cyan-400 transition-colors" />
-                <div className="flex items-center gap-3 text-xs text-slate-400 font-mono">
+                <Github size={20} className="text-brand-muted group-hover:text-brand-primary transition-colors" />
+                <div className="flex items-center gap-3 text-xs text-brand-dim font-mono">
                   {repo.stargazers_count > 0 && (
                     <span className="flex items-center gap-1 group-hover:text-amber-400 transition-colors">
                       <Star size={12} /> {repo.stargazers_count}
                     </span>
                   )}
                   {repo.forks_count > 0 && (
-                    <span className="flex items-center gap-1 group-hover:text-emerald-400 transition-colors">
+                    <span className="flex items-center gap-1 group-hover:text-brand-success transition-colors">
                       <GitFork size={12} /> {repo.forks_count}
                     </span>
                   )}
                 </div>
               </div>
               
-              <h4 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors line-clamp-1">{repo.name}</h4>
-              <p className="text-slate-400 text-sm mb-6 line-clamp-2 h-10">{repo.description}</p>
+              <h4 className="text-lg font-semibold text-brand-text mb-2 group-hover:text-brand-primary transition-colors line-clamp-1">{repo.name}</h4>
+              <p className="text-brand-muted text-sm mb-6 line-clamp-2 h-10">{repo.description}</p>
               
-              <div className="flex justify-between items-center mt-auto pt-4 border-t border-slate-800/60">
+              <div className="flex justify-between items-center mt-auto pt-4 border-t border-brand-border">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: getLanguageColor(repo.language) }} />
-                  <span className="text-xs text-slate-300 font-medium">{repo.language || 'Code'}</span>
+                  <span className="text-xs text-brand-muted font-medium">{repo.language || 'Code'}</span>
                 </div>
-                <span className="text-xs text-slate-500 group-hover:text-white transition-colors flex items-center gap-1">
-                  View <ArrowRight size={10} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                <span className="text-xs text-brand-dim group-hover:text-brand-text transition-colors flex items-center gap-1">
+                  View <ArrowRight size={12} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </span>
               </div>
             </a>
@@ -144,7 +144,7 @@ export default function GithubProjects({ username, featuredProjects }: GithubPro
             href={`https://github.com/${username}`} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white rounded-lg border border-slate-700 transition-all text-sm font-medium"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.08)] text-brand-text rounded-lg border border-brand-border transition-all text-sm font-medium"
           >
             View GitHub Profile <ExternalLink size={14} />
           </a>

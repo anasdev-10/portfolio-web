@@ -48,7 +48,7 @@ export default function Navigation({ personal }: NavigationProps) {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0a0e27]/90 backdrop-blur-md border-b border-cyan-500/20 shadow-lg shadow-cyan-500/5'
+          ? 'bg-[#0B0B0C]/80 backdrop-blur-xl border-b border-white/5'
           : 'bg-transparent'
       }`}
     >
@@ -57,10 +57,10 @@ export default function Navigation({ personal }: NavigationProps) {
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="text-2xl font-black tracking-tight"
+          className="text-xl font-bold tracking-tight text-white flex items-center gap-2"
         >
-          <span className="text-shimmer">Anas</span>
-          <span className="text-white/30 text-sm font-normal ml-2 hidden sm:inline">AI Engineer</span>
+          Anas
+          <span className="text-white/40 text-sm font-normal hidden sm:inline">AI Engineer</span>
         </a>
 
         {/* Desktop Nav */}
@@ -69,29 +69,24 @@ export default function Navigation({ personal }: NavigationProps) {
             <button
               key={link.href}
               onClick={() => scrollTo(link.href)}
-              className={`text-sm font-medium transition-all duration-200 relative group ${
+              className={`text-sm font-medium transition-colors duration-200 ${
                 activeSection === link.href.replace('#', '')
-                  ? 'text-cyan-400'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'text-white'
+                  : 'text-brand-muted hover:text-white'
               }`}
             >
               {link.label}
-              <span
-                className={`absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-cyan-400 to-pink-500 transition-all duration-300 ${
-                  activeSection === link.href.replace('#', '') ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}
-              />
             </button>
           ))}
         </div>
 
         {/* Social icons desktop */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-4">
           <a
             href={personal.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200"
+            className="text-brand-muted hover:text-white transition-colors duration-200"
             aria-label="GitHub"
           >
             <Github size={18} />
@@ -100,14 +95,14 @@ export default function Navigation({ personal }: NavigationProps) {
             href={personal.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200"
+            className="text-brand-muted hover:text-white transition-colors duration-200"
             aria-label="LinkedIn"
           >
             <Linkedin size={18} />
           </a>
           <a
             href={`mailto:${personal.socials.email}`}
-            className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-cyan-500/10 rounded-lg transition-all duration-200"
+            className="text-brand-muted hover:text-white transition-colors duration-200"
             aria-label="Email"
           >
             <Mail size={18} />
@@ -117,7 +112,7 @@ export default function Navigation({ personal }: NavigationProps) {
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-cyan-400 hover:bg-cyan-500/10 rounded-lg transition"
+          className="md:hidden p-2 text-white hover:bg-white/5 rounded-lg transition"
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -130,24 +125,24 @@ export default function Navigation({ personal }: NavigationProps) {
           mobileOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="px-6 py-4 bg-[#0a0e27]/95 backdrop-blur-md border-b border-cyan-500/20 space-y-1">
+        <div className="px-6 py-4 bg-[#0B0B0C]/95 backdrop-blur-xl border-b border-white/5 space-y-1">
           {navLinks.map((link) => (
             <button
               key={link.href}
               onClick={() => scrollTo(link.href)}
-              className="block w-full text-left px-4 py-3 text-slate-300 hover:text-white hover:bg-cyan-500/10 rounded-lg transition-all duration-200 font-medium"
+              className="block w-full text-left px-4 py-3 text-brand-muted hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 font-medium"
             >
               {link.label}
             </button>
           ))}
-          <div className="flex gap-4 px-4 pt-3 border-t border-slate-700/50 mt-2">
-            <a href={personal.socials.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
+          <div className="flex gap-6 px-4 pt-4 border-t border-white/10 mt-2">
+            <a href={personal.socials.github} target="_blank" rel="noopener noreferrer" className="text-brand-muted hover:text-white transition">
               <Github size={18} />
             </a>
-            <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition">
+            <a href={personal.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-brand-muted hover:text-white transition">
               <Linkedin size={18} />
             </a>
-            <a href={`mailto:${personal.socials.email}`} className="text-slate-400 hover:text-cyan-400 transition">
+            <a href={`mailto:${personal.socials.email}`} className="text-brand-muted hover:text-white transition">
               <Mail size={18} />
             </a>
           </div>
