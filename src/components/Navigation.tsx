@@ -52,7 +52,7 @@ export default function Navigation({ personal }: NavigationProps) {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl 2xl:max-w-[1400px] mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
         {/* Logo */}
         <a
           href="#"

@@ -73,7 +73,7 @@ export default function GithubProjects({ username, featuredProjects }: GithubPro
 
   return (
     <section ref={sectionRef} className="py-16 px-6 relative border-t border-brand-border bg-brand-bg">
-      <div className="max-w-7xl 2xl:max-w-[1400px] mx-auto relative z-10">
+      <div className="w-full max-w-[1600px] mx-auto relative z-10">
         
         <div className={`flex items-center justify-between mb-10 transition-all duration-700 ${
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'

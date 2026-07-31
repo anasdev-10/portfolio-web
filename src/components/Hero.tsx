@@ -25,7 +25,7 @@ export default function Hero({ personal, onOpenChat }: HeroProps) {
         style={{ background: 'radial-gradient(circle at 75% 50%, rgba(255,255,255,0.01) 0%, transparent 40%)' }} />
 
       {/* Two-column layout */}
-      <div className={`relative z-10 w-full max-w-7xl 2xl:max-w-[1400px] mx-auto px-6 md:px-12 py-16 grid md:grid-cols-[1.2fr_1fr] gap-12 items-center transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 py-16 grid md:grid-cols-[1.2fr_1fr] gap-12 items-center transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
 
         {/* ── LEFT COLUMN: Text content ── */}
         <div className={`transition-all duration-1000 delay-200 ${visible ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>

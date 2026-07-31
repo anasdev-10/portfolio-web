@@ -33,7 +33,7 @@ export default function Projects({ projects, onAskAbout }: ProjectsProps) {
 
   return (
     <section id="projects" ref={sectionRef} className="py-28 px-6 relative bg-brand-bg">
-      <div className="max-w-7xl 2xl:max-w-[1400px] mx-auto relative z-10">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 relative z-10">
         
         {/* Heading */}
         <div

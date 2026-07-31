@@ -48,7 +48,7 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
 
   return (
     <section id="contact" ref={sectionRef} className="py-28 px-6 relative bg-brand-bg">
-      <div className="max-w-5xl 2xl:max-w-6xl mx-auto relative z-10">
+      <div className="w-full max-w-[1600px] mx-auto relative z-10">
         
         {/* Heading */}
         <div

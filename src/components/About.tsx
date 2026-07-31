@@ -25,7 +25,7 @@ export default function About({ experience, education, futureGoals }: AboutProps
 
   return (
     <section id="about" ref={sectionRef} className="py-28 px-6 relative bg-brand-bg">
-      <div className="max-w-6xl 2xl:max-w-7xl mx-auto relative z-10">
+      <div className="w-full max-w-[1600px] mx-auto relative z-10">
         
         {/* Heading */}
         <div
