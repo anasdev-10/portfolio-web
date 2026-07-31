@@ -8,6 +8,7 @@ import Skills from '@/components/Skills';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import ChatAssistant from '@/components/ChatAssistant';
+import Background from '@/components/Background';
 import contentData from '../../content.json';
 import type { PortfolioData } from '@/lib/types';
 
@@ -35,7 +36,8 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-[#060612] min-h-screen text-white overflow-x-hidden">
+    <main className="bg-brand-bg min-h-screen text-white overflow-x-hidden relative">
+      <Background />
       <Navigation personal={data.personal} />
 
       <Hero personal={data.personal} onOpenChat={handleOpenChat} />
