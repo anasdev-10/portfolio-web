@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { Github, Star, GitFork, ExternalLink, Code2, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Github, Star, GitFork, ExternalLink, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import type { Project } from '@/lib/types';
+import MagneticButton from './MagneticButton';
 
 interface GithubRepo {
   id: number;
@@ -21,20 +23,28 @@ interface GithubProjectsProps {
   featuredProjects: Project[];
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { type: 'spring' as const, stiffness: 100, damping: 15 } 
+  },
+};
+
 export default function GithubProjects({ username, featuredProjects }: GithubProjectsProps) {
   const [repos, setRepos] = useState<GithubRepo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [visible, setVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -67,17 +77,20 @@ export default function GithubProjects({ username, featuredProjects }: GithubPro
   }, [username, featuredProjects]);
 
   if (loading || repos.length === 0) {
-    // Only show if we actually fetched something or are loading
     return null;
   }
 
   return (
-    <section ref={sectionRef} className="py-16 px-6 relative border-t border-brand-border bg-brand-bg">
+    <section className="py-16 px-6 relative border-t border-brand-border bg-brand-bg">
       <div className="w-full max-w-[1600px] mx-auto relative z-10">
         
-        <div className={`flex items-center justify-between mb-10 transition-all duration-700 ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={itemVariants}
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10"
+        >
           <div>
             <h3 className="text-2xl font-bold text-brand-text mb-2 flex items-center gap-2">
               <Github size={24} className="text-brand-muted" />
@@ -85,27 +98,33 @@ export default function GithubProjects({ username, featuredProjects }: GithubPro
             </h3>
             <p className="text-brand-muted text-sm">Smaller projects, scripts, and experiments directly from GitHub.</p>
           </div>
-          <a 
-            href={`https://github.com/${username}`} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-2 px-4 py-2 bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.08)] text-brand-text rounded-lg border border-brand-border transition-all text-sm font-medium"
-          >
-            View GitHub Profile <ExternalLink size={14} />
-          </a>
-        </div>
+          <MagneticButton>
+            <a 
+              href={`https://github.com/${username}`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.08)] text-brand-text rounded-lg border border-brand-border transition-all text-sm font-medium"
+            >
+              View GitHub Profile <ExternalLink size={14} />
+            </a>
+          </MagneticButton>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {repos.map((repo, idx) => (
-            <a
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          {repos.map((repo) => (
+            <motion.a
               key={repo.id}
+              variants={itemVariants}
               href={repo.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`block card-graphite p-6 group transition-all duration-300 ${
-                visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-              style={{ transitionDelay: `${100 + idx * 50}ms` }}
+              className="block card-graphite p-6 group"
             >
               <div className="flex justify-between items-start mb-4">
                 <Github size={20} className="text-brand-muted group-hover:text-brand-primary transition-colors" />
@@ -135,39 +154,38 @@ export default function GithubProjects({ username, featuredProjects }: GithubPro
                   View <ArrowRight size={12} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </span>
               </div>
-            </a>
+            </motion.a>
           ))}
-        </div>
+        </motion.div>
         
         <div className="mt-8 text-center sm:hidden">
-           <a 
-            href={`https://github.com/${username}`} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.08)] text-brand-text rounded-lg border border-brand-border transition-all text-sm font-medium"
-          >
-            View GitHub Profile <ExternalLink size={14} />
-          </a>
+          <MagneticButton>
+            <a 
+              href={`https://github.com/${username}`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.08)] text-brand-text rounded-lg border border-brand-border transition-all text-sm font-medium"
+            >
+              View GitHub Profile <ExternalLink size={14} />
+            </a>
+          </MagneticButton>
         </div>
       </div>
     </section>
   );
 }
 
-// Helper for language colors
 function getLanguageColor(lang: string) {
   const colors: Record<string, string> = {
-    Python: '#3572A5',
-    TypeScript: '#3178c6',
     JavaScript: '#f1e05a',
+    TypeScript: '#3178c6',
+    Python: '#3572A5',
     HTML: '#e34c26',
     CSS: '#563d7c',
-    Jupyter: '#DA5B0B',
-    'C++': '#f34b7d',
-    C: '#555555',
-    Shell: '#89e051',
+    Java: '#b07219',
+    Rust: '#dea584',
     Go: '#00ADD8',
-    Rust: '#dea584'
+    'Jupyter Notebook': '#DA5B0B'
   };
-  return colors[lang] || '#a855f7';
+  return colors[lang] || '#8b949e';
 }

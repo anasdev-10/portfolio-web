@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import { Code2, Brain, Server, Wrench } from 'lucide-react';
+import { motion } from 'framer-motion';
 import type { Skills as SkillsType } from '@/lib/types';
 
 interface SkillsProps {
@@ -35,28 +35,37 @@ const categories = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { type: 'spring' as const, stiffness: 100, damping: 15 } 
+  },
+};
+
 export default function Skills({ skills }: SkillsProps) {
-  const [visible, setVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="skills" ref={sectionRef} className="py-28 px-6 relative bg-brand-bg">
+    <section id="skills" className="py-28 px-6 relative bg-brand-bg">
       <div className="w-full max-w-[1600px] mx-auto relative z-10">
         
         {/* Heading */}
-        <div
-          className={`mb-16 transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={itemVariants}
+          className="mb-16"
         >
           <div className="flex items-center gap-4 mb-4">
             <p className="text-brand-primary font-mono text-sm uppercase tracking-widest">// tech stack</p>
@@ -70,21 +79,23 @@ export default function Skills({ skills }: SkillsProps) {
               Full-stack AI/ML capability — from data pipelines to production deployment.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Skill cards grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((cat, catIdx) => {
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {categories.map((cat) => {
             const items = skills[cat.key] as string[];
             return (
-              <div
+              <motion.div
                 key={cat.key}
-                className={`card-graphite p-6 transition-all duration-700`}
-                style={{
-                  transitionDelay: `${catIdx * 100}ms`,
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateY(0)' : 'translateY(30px)',
-                }}
+                variants={itemVariants}
+                className="card-graphite p-6"
               >
                 {/* Card header */}
                 <div className="flex items-center gap-3 mb-6">
@@ -98,7 +109,7 @@ export default function Skills({ skills }: SkillsProps) {
                 </div>
 
                 {/* Chips */}
-                <div className="flex flex-wrap gap-2 stagger">
+                <div className="flex flex-wrap gap-2">
                   {items.map((item) => (
                     <span
                       key={item}
@@ -115,10 +126,10 @@ export default function Skills({ skills }: SkillsProps) {
                     <span className="text-brand-primary">{items.length}</span> technologies
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

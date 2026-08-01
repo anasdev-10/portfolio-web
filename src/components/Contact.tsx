@@ -1,27 +1,35 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import { Github, Linkedin, Mail, Send, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import type { Personal } from '@/lib/types';
+import MagneticButton from './MagneticButton';
 
 interface ContactProps {
   personal: Personal;
   onOpenChat: () => void;
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { type: 'spring' as const, stiffness: 100, damping: 15 } 
+  },
+};
+
 export default function Contact({ personal, onOpenChat }: ContactProps) {
-  const [visible, setVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   const contactLinks = [
     {
       label: 'Email',
@@ -47,14 +55,16 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
   ];
 
   return (
-    <section id="contact" ref={sectionRef} className="py-28 px-6 relative bg-brand-bg">
+    <section id="contact" className="py-28 px-6 relative bg-brand-bg">
       <div className="w-full max-w-[1600px] mx-auto relative z-10">
         
         {/* Heading */}
-        <div
-          className={`mb-16 transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={itemVariants}
+          className="mb-16"
         >
           <div className="flex items-center gap-4 mb-4">
             <p className="text-brand-primary font-mono text-sm uppercase tracking-widest">// get in touch</p>
@@ -68,20 +78,24 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
               Whether it&apos;s a full-time role, consulting project, or just a chat about AI — I&apos;m always open to the right conversation.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Contact cards */}
-        <div className="grid md:grid-cols-3 gap-5 mb-16">
-          {contactLinks.map((link, idx) => (
-            <a
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid md:grid-cols-3 gap-5 mb-16"
+        >
+          {contactLinks.map((link) => (
+            <motion.a
               key={link.label}
+              variants={itemVariants}
               href={link.href}
               target={link.href.startsWith('mailto') ? undefined : '_blank'}
               rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-              className={`card-graphite p-6 block group ${
-                visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${idx * 100}ms` }}
+              className="card-graphite p-6 block group"
             >
               <div className="p-3 rounded-xl bg-[rgba(255,255,255,0.03)] border border-brand-border w-fit mb-5 group-hover:bg-brand-primary group-hover:border-brand-primary transition-colors duration-300">
                 <link.Icon size={20} className="text-brand-text" />
@@ -93,30 +107,34 @@ export default function Contact({ personal, onOpenChat }: ContactProps) {
                 <span>Open</span>
                 <ArrowRight size={12} />
               </div>
-            </a>
+            </motion.a>
           ))}
-        </div>
+        </motion.div>
 
         {/* Chat CTA */}
-        <div
-          className={`text-center transition-all duration-700 delay-300 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={itemVariants}
+          className="text-center"
         >
           <div className="inline-block card-graphite p-8">
             <p className="text-brand-text text-lg mb-2 font-semibold">Not sure where to start?</p>
             <p className="text-brand-muted mb-8 text-sm">
               Chat with Anas Assistant — it knows everything about my projects, skills, and availability.
             </p>
-            <button
-              onClick={onOpenChat}
-              className="btn-outline inline-flex items-center gap-2"
-            >
-              <Send size={16} />
-              Open Anas Assistant
-            </button>
+            <MagneticButton>
+              <button
+                onClick={onOpenChat}
+                className="btn-outline inline-flex items-center gap-2"
+              >
+                <Send size={16} />
+                Open Anas Assistant
+              </button>
+            </MagneticButton>
           </div>
-        </div>
+        </motion.div>
 
         {/* Footer */}
         <div className="mt-24 pt-8 border-t border-brand-border text-center flex flex-col items-center gap-4">

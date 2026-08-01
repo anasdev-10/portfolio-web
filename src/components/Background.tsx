@@ -1,39 +1,120 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 export default function Background() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let particles: Particle[] = [];
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    };
+
+    class Particle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+
+      constructor() {
+        this.x = Math.random() * canvas!.width;
+        this.y = Math.random() * canvas!.height;
+        this.vx = (Math.random() - 0.5) * 0.5; // Very slow movement
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 1.5 + 0.5;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas!.width) this.vx = -this.vx;
+        if (this.y < 0 || this.y > canvas!.height) this.vy = -this.vy;
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.4)'; // Primary brand color
+        ctx.fill();
+      }
+    }
+
+    const initParticles = () => {
+      particles = [];
+      // Calculate number of particles based on screen size (keeps density consistent)
+      const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    };
+
+    const drawLines = () => {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 120) {
+            ctx!.beginPath();
+            ctx!.moveTo(particles[i].x, particles[i].y);
+            ctx!.lineTo(particles[j].x, particles[j].y);
+            
+            // Fades out as distance increases
+            const opacity = 1 - distance / 120;
+            ctx!.strokeStyle = `rgba(59, 130, 246, ${opacity * 0.15})`; // Subtle blue connections
+            ctx!.lineWidth = 0.5;
+            ctx!.stroke();
+          }
+        }
+      }
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((particle) => {
+        particle.update();
+        particle.draw();
+      });
+
+      drawLines();
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener('resize', resize);
+    resize();
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
     <div className="fixed inset-0 z-[-1] overflow-hidden bg-brand-bg pointer-events-none">
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full"
+      />
       
-      {/* Subtle moving grid */}
-      <div 
-        className="absolute inset-[-100%] opacity-[0.015]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #ffffff 1px, transparent 1px),
-            linear-gradient(to bottom, #ffffff 1px, transparent 1px)
-          `,
-          backgroundSize: '4rem 4rem',
-          maskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 40%, transparent 100%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 40%, transparent 100%)',
-          animation: 'grid-pan 60s linear infinite'
-        }}
-      />
-
-      {/* Two slow-moving glowing orbs for a premium aurora effect */}
-      <div 
-        className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full opacity-[0.04] blur-[150px]"
-        style={{
-          background: 'linear-gradient(to right, #3B82F6, #8B5CF6)',
-          animation: 'aurora-blob 25s infinite alternate'
-        }}
-      />
-      <div 
-        className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full opacity-[0.03] blur-[150px]"
-        style={{
-          background: 'linear-gradient(to right, #3B82F6, #3B82F6)',
-          animation: 'aurora-blob 35s infinite alternate-reverse'
-        }}
-      />
+      {/* Subtle bottom gradient to blend with the graphite theme */}
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent opacity-80" />
     </div>
   );
 }

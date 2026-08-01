@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import { GraduationCap, Briefcase, Target, Download, CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 import type { Experience, Education, FutureGoals } from '@/lib/types';
+import MagneticButton from './MagneticButton';
 
 interface AboutProps {
   experience: Experience;
@@ -10,28 +11,37 @@ interface AboutProps {
   futureGoals?: FutureGoals;
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { type: 'spring' as const, stiffness: 100, damping: 15 } 
+  },
+};
+
 export default function About({ experience, education, futureGoals }: AboutProps) {
-  const [visible, setVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="about" ref={sectionRef} className="py-28 px-6 relative bg-brand-bg">
+    <section id="about" className="py-28 px-6 relative bg-brand-bg">
       <div className="w-full max-w-[1600px] mx-auto relative z-10">
         
         {/* Heading */}
-        <div
-          className={`mb-16 transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={itemVariants}
+          className="mb-16"
         >
           <div className="flex items-center gap-4 mb-4">
             <p className="text-brand-primary font-mono text-sm uppercase tracking-widest">// background</p>
@@ -43,18 +53,23 @@ export default function About({ experience, education, futureGoals }: AboutProps
               AI Engineer building production systems that solve real problems — not just demos.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Timeline */}
-        <div className="relative mb-16">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative mb-16"
+        >
           {/* Timeline line */}
           <div className="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-brand-border" />
 
           {/* Education */}
-          <div
-            className={`relative flex flex-col md:flex-row md:items-start gap-6 mb-12 transition-all duration-700 delay-100 ${
-              visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
+          <motion.div
+            variants={itemVariants}
+            className="relative flex flex-col md:flex-row md:items-start gap-6 mb-12"
           >
             {/* Timeline dot */}
             <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-brand-primary border-4 border-brand-bg z-10 mt-1" />
@@ -89,13 +104,12 @@ export default function About({ experience, education, futureGoals }: AboutProps
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Experience */}
-          <div
-            className={`relative flex flex-col md:flex-row md:items-start gap-6 mb-12 transition-all duration-700 delay-200 ${
-              visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
+          <motion.div
+            variants={itemVariants}
+            className="relative flex flex-col md:flex-row md:items-start gap-6 mb-12"
           >
             <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-brand-text border-4 border-brand-bg z-10 mt-1" />
 
@@ -130,14 +144,13 @@ export default function About({ experience, education, futureGoals }: AboutProps
             <div className="hidden md:block w-1/2 pl-12 pt-1">
               <span className="text-brand-muted font-mono text-sm">{experience.duration}</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Future / Goals */}
           {futureGoals && (
-            <div
-              className={`relative flex flex-col md:flex-row md:items-start gap-6 transition-all duration-700 delay-300 ${
-                visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
+            <motion.div
+              variants={itemVariants}
+              className="relative flex flex-col md:flex-row md:items-start gap-6"
             >
               <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-brand-border border-4 border-brand-bg z-10 mt-1" />
 
@@ -168,29 +181,33 @@ export default function About({ experience, education, futureGoals }: AboutProps
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
         {/* Resume Download */}
-        <div
-          className={`text-center transition-all duration-700 delay-400 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={itemVariants}
+          className="text-center"
         >
           <div className="inline-block card-graphite p-8 border border-brand-border">
             <p className="text-brand-text mb-2 text-lg font-semibold">Want the full picture?</p>
             <p className="text-brand-muted text-sm mb-6">Download my resume for complete details on projects, experience, and skills.</p>
-            <a
-              href="/Muhammad_Anas_Resume.pdf"
-              download="Muhammad_Anas_Resume.pdf"
-              className="btn-primary inline-flex items-center gap-2"
-            >
-              <Download size={18} />
-              Download Resume (PDF)
-            </a>
+            <MagneticButton>
+              <a
+                href="/Muhammad_Anas_Resume.pdf"
+                download="Muhammad_Anas_Resume.pdf"
+                className="btn-primary inline-flex items-center gap-2"
+              >
+                <Download size={18} />
+                Download Resume (PDF)
+              </a>
+            </MagneticButton>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
