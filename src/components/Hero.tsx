@@ -120,7 +120,7 @@ export default function Hero({ personal, onOpenChat }: HeroProps) {
             {/* Inner frame for the photo */}
             <div className="absolute inset-[25%] rounded-full border border-[rgba(255,255,255,0.1)] bg-[#111214] shadow-2xl overflow-hidden z-10 flex items-center justify-center">
                <Image
-                  src="/avatar.png"
+                  src="/avatar.jpeg"
                   alt="Muhammad Anas"
                   width={400}
                   height={400}
